@@ -244,7 +244,6 @@ Console.WriteLine();
 int[] indexes=MinElement(myArray);
 Show2dArray(ChangedArray(myArray,indexes));
 */
-
 // Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 /*
 int[,] CreateRandom2dArray ()
@@ -280,19 +279,14 @@ void Show2dArray (int[,] array)
 void SortRows (int[,] array)
 {
     for (int i=0; i<array.GetLength(0); i++)
-    {
-        for (int j=0; j>array.GetLength(1)-1; j++)
-        {
-            int minposition=j;
-            for (int k=j+1; k<array.GetLength(1); k++)
-            {
-                if (array[i,k]<array[i,minposition]) minposition=k;
-            }
-            int tempor=array[i,j];
-            array[i,j]=array[i,minposition];
-            array[i,minposition]=tempor;
-        }
-    }
+        for (int j = 0; j < array.GetLength(1); j++)
+            for (int k = array.GetLength(1)-1; k > 0 ; k--)   
+                if (array[i,k] > array[i,k-1])
+                {
+                    int t = array[i,k-1];
+                    array[i,k-1] = array[i,k];
+                    array[i,k] = t;
+                }
 }
 
 int[,] myArray= CreateRandom2dArray();
@@ -301,7 +295,6 @@ Console.WriteLine("Sorted array:");
 SortRows(myArray);
 Show2dArray(myArray);
 */
-
 // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 /*
 int[,] CreateRandom2dArray ()
@@ -423,10 +416,9 @@ Show2dArray(secondArray);
 int[,] result=Prod2dArrays(firstArray,secondArray);
 Show2dArray(result);
 */
-
-//Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+//Задача 60. Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 /*
-int[,,] CreateRandom3dArray (int max, int min)
+int[,,] CreateRandom3dArray ()
 {
     Console.WriteLine("Input a numbers of rows: ");
     int layers =Convert.ToInt32(Console.ReadLine());
@@ -436,29 +428,15 @@ int[,,] CreateRandom3dArray (int max, int min)
     int rows=Convert.ToInt32(Console.ReadLine());
 
     int[,,] array=new int[rows,columns,layers];
-
+    int num=10;
     for (int i=0; i<rows; i++)
         for (int j=0; j<columns; j++)
             for (int k=0; k<layers; k++)
                     {
-                        array[i,j,k]= new Random().Next(min, max+1);
+                        array[i,j,k]=num;
+                        num=num+1;
                     }
     return array;
-}
-
-void UniqueElements (int[,,] array, int max, int min)
-{
-    int unique=array[0,0,0];
-    for (int i=0; i<array.GetLength(0); i++)
-        for (int j=0; j<array.GetLength(1); j++)
-            for (int k=1; k<array.GetLength(2); k++)
-            {
-                if (array[i,j,k]==unique) 
-                {
-                    array[i,j,k]= new Random().Next(min, max+1);
-                    unique=array[i,j,k];
-                }
-            }
 }
 
 void Show3dArray (int[,,] array)
@@ -476,13 +454,7 @@ void Show3dArray (int[,,] array)
      Console.WriteLine();
 }
 
-Console.WriteLine("Input a min of element: ");
-int min =Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Input a max of element: ");
-int max =Convert.ToInt32(Console.ReadLine());
-
-int[,,] myArray= CreateRandom3dArray(max,min);
-UniqueElements(myArray,max,min);
+int[,,] myArray= CreateRandom3dArray();
 Show3dArray(myArray);
 */
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -517,6 +489,7 @@ void Show2dArray (int[,] array)
 int[,] myArray= Spiral2dArray();
 Show2dArray(myArray);
 */
+
 
 
 
